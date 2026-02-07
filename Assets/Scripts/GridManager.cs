@@ -34,12 +34,14 @@ public class GridManager : MonoBehaviour
     protected virtual void OnDisable()
     {
         LeanTouch.OnFingerSwipe -= HandleFingerSwipe;
+
+        LeanTouch.OnFingerTap -= CheckCollision;
     }
 
     private void HandleFingerSwipe(LeanFinger finger)
     {
         Vector2 swipe = finger.SwipeScreenDelta;
-        if (swipe.y < -Mathf.Abs(swipe.x))
+        if (swipe.y > Mathf.Abs(swipe.x))
         {
             returnSelected();
         }
@@ -52,23 +54,14 @@ public class GridManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            returnSelected();
-        }
-
-        if (Input.GetMouseButtonDown(0) )
-        {
-            CheckCollision();
-        }
     }
 
     void CheckCollision(LeanFinger finger)
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
+        Vector3 fingerPos = Camera.main.ScreenToWorldPoint(finger.ScreenPosition);
+        Vector2 fingerPosWorld = new Vector2(fingerPos.x, fingerPos.y);
 
-        RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
+        RaycastHit2D hit = Physics2D.Raycast(fingerPosWorld, Vector2.zero);
         if (hit.collider != null)
         {
             Debug.Log("Diste clic en: " + hit.collider.gameObject.name);
