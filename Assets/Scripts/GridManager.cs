@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Lean.Touch;
+using UnityEditor.Experimental.GraphView;
 
 public class GridManager : MonoBehaviour
 {
@@ -9,7 +10,10 @@ public class GridManager : MonoBehaviour
 
     public List<GameObject> boxList = new List<GameObject>();
 
-    public List<GameObject> boxSelectedlist = new List<GameObject>();
+    public List<int> SelectedIDs = new List<int>();
+
+    public List<int> idToCompare = new List<int>();
+
 
     private void Awake()
     {
@@ -43,7 +47,7 @@ public class GridManager : MonoBehaviour
         Vector2 swipe = finger.SwipeScreenDelta;
         if (swipe.y > Mathf.Abs(swipe.x))
         {
-            returnSelected();
+            Compare();
         }
     }
 
@@ -64,35 +68,62 @@ public class GridManager : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(fingerPosWorld, Vector2.zero);
         if (hit.collider != null)
         {
-            Debug.Log("Diste clic en: " + hit.collider.gameObject.name);
             hit.collider.gameObject.GetComponent<BoxScript>().CheckSelected();
         }
     }
 
     public void addSelected(GameObject box)
     {
-        if (!boxSelectedlist.Contains(box))
-            boxSelectedlist.Add(box);
+        if (!SelectedIDs.Contains(box.GetComponent<BoxScript>().ID))
+            SelectedIDs.Add(box.GetComponent<BoxScript>().ID);
     }
 
     public void removeSelected(GameObject box)
     {
-        if (boxSelectedlist.Contains(box))
-            boxSelectedlist.Remove(box);
+        if (SelectedIDs.Contains(box.GetComponent<BoxScript>().ID))
+            SelectedIDs.Remove(box.GetComponent<BoxScript>().ID);
     }
 
     public void returnSelected()
     {
-        if (boxSelectedlist.Count > 0)
+        if (SelectedIDs.Count > 0)
         {
-            foreach (GameObject box in boxSelectedlist)
+            foreach (var box in SelectedIDs)
             {
-                Debug.Log("Los cuadros elegidos son: " + box.GetComponent<BoxScript>().ID);
+                Debug.Log("Los cuadros elegidos son: " + box);
             }
         }
         else
         {
             Debug.Log("Lista vacia");
         }
+    }
+
+    void Compare()
+    {
+        int correctBoxes = 0;
+
+
+        foreach (var t in idToCompare)
+        {
+            if (SelectedIDs.Contains(t))
+            {
+                correctBoxes++;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        if (correctBoxes == idToCompare.Count)
+        {
+            Correcto();
+        }
+    }
+
+    void Correcto()
+    {
+        Debug.Log("Correcto");
     }
 }

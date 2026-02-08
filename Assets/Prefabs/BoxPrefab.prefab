@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.26405, y: 2.71607, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -135,6 +135,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66316eb04c0fd6645ac37784b6945566, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoxScript
+  isSelected: 0
+  ID: 0
 --- !u!61 &-2787613329200246339
 BoxCollider2D:
   m_ObjectHideFlags: 0
