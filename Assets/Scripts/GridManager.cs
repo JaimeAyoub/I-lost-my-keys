@@ -7,6 +7,8 @@ using UnityEditor.Experimental.GraphView;
 public class GridManager : MonoBehaviour
 {
     public static GridManager instance;
+    
+    public AnimationUI animationUI;
 
     public List<GameObject> boxList = new List<GameObject>();
 
@@ -47,7 +49,7 @@ public class GridManager : MonoBehaviour
         Vector2 swipe = finger.SwipeScreenDelta;
         if (swipe.y > Mathf.Abs(swipe.x))
         {
-            Compare();
+           animationUI.StartAnimation();
         }
     }
 
