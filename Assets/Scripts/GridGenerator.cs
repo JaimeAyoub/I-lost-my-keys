@@ -10,6 +10,7 @@ public class GridGenerator : MonoBehaviour
     public int height = 10;
     public float distanceBetweeninX = 1.0f;
     public float distanceBetweeninY = 1.0f;
+    public Transform parent;
 
     public GameObject box;
 
@@ -36,8 +37,9 @@ public class GridGenerator : MonoBehaviour
             for (float j = 0; j < height; j += distanceBetweeninY)
             {
                 GameObject newBox = Instantiate(box, new Vector3(i, j, 0), Quaternion.identity,
-                    GridManager.instance.transform);
+                    parent);
                 newBox.GetComponent<BoxScript>().ID = idGenerator;
+                newBox.transform.position -= new Vector3(4, 2, 0);
                 newBox.name = "Box" + idGenerator;
                 idGenerator++;
                 GridManager.instance.boxList.Add(newBox);
