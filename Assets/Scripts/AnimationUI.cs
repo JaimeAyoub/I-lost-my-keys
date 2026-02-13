@@ -33,10 +33,10 @@ public class AnimationUI : MonoBehaviour
     {
     }
 
-    public void StartAnimation()
+    public void ToptoDownAnimation()
     {
         Vector2 startPosition = endPosition;
-        float offSetY = 1080;
+        float offSetY = 10;
 
         startPosition = new Vector2(endPosition.x, startPosition.y + offSetY);
 
@@ -46,4 +46,11 @@ public class AnimationUI : MonoBehaviour
 
         currentTween = objetctToAnimate.DOMoveY(endPosition.y, animationDuration).SetEase(animationCurve);
     }
+
+    public void DownToTopAnimation()
+    {
+        currentTween?.Kill();
+        currentTween = objetctToAnimate.DOMoveY(objetctToAnimate.transform.position.y + 10, animationDuration).SetEase(animationCurve);
+    }
+
 }

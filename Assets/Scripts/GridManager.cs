@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Lean.Touch;
-using UnityEditor.Experimental.GraphView;
+
 
 public class GridManager : MonoBehaviour
 {
@@ -51,17 +51,20 @@ public class GridManager : MonoBehaviour
         Debug.Log(swipe.y);
         if (swipe.y < -sensitivityToSwipe && Mathf.Abs(swipe.y) > Mathf.Abs(swipe.x))
         {
-            animationUI.StartAnimation();
+            animationUI.ToptoDownAnimation();
         }
 
         if (swipe.y > 0 && Mathf.Abs(swipe.y) > Mathf.Abs(swipe.x))
         {
-            Debug.Log("¡Swipe hacia ARRIBA detectado!");
+            Compare();
+            animationUI.DownToTopAnimation();
         }
     }
 
     void Start()
     {
+        Application.targetFrameRate = 60;
+        QualitySettings.vSyncCount = 0;
     }
 
     // Update is called once per frame
