@@ -7,7 +7,7 @@ using UnityEditor.Experimental.GraphView;
 public class GridManager : MonoBehaviour
 {
     public static GridManager instance;
-    
+
     public AnimationUI animationUI;
 
     public List<GameObject> boxList = new List<GameObject>();
@@ -16,6 +16,7 @@ public class GridManager : MonoBehaviour
 
     public List<int> idToCompare = new List<int>();
 
+    public float sensitivityToSwipe = 50.0f;
 
     private void Awake()
     {
@@ -47,9 +48,15 @@ public class GridManager : MonoBehaviour
     private void HandleFingerSwipe(LeanFinger finger)
     {
         Vector2 swipe = finger.SwipeScreenDelta;
-        if (swipe.y > Mathf.Abs(swipe.x))
+        Debug.Log(swipe.y);
+        if (swipe.y < -sensitivityToSwipe && Mathf.Abs(swipe.y) > Mathf.Abs(swipe.x))
         {
-           animationUI.StartAnimation();
+            animationUI.StartAnimation();
+        }
+
+        if (swipe.y > 0 && Mathf.Abs(swipe.y) > Mathf.Abs(swipe.x))
+        {
+            Debug.Log("¡Swipe hacia ARRIBA detectado!");
         }
     }
 
@@ -60,6 +67,7 @@ public class GridManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
     }
 
     void CheckCollision(LeanFinger finger)
