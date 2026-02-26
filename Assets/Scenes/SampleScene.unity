@@ -1003,9 +1003,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoorsManager
   doorPrefab: {fileID: 8682017203271835130, guid: 7a49e477245d7b64180bd11fcf587bd9, type: 3}
+  doorOpenPrefab: {fileID: 2621976992900950663, guid: 3ca86c166c1231743a6f66d5c4808974, type: 3}
   spawnPoint: {fileID: 643345502}
   doorsToSpawn: 5
   spaceBetweenDoors: 4
+  doorsQueue: []
 --- !u!4 &1695157703
 Transform:
   m_ObjectHideFlags: 0

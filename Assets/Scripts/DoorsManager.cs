@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 
 public class DoorsManager : MonoBehaviour
@@ -7,6 +8,7 @@ public class DoorsManager : MonoBehaviour
     public static DoorsManager instance;
 
     public GameObject doorPrefab;
+    public GameObject doorOpenPrefab;
     public Transform spawnPoint;
 
     public int doorsToSpawn = 5;
@@ -62,15 +64,34 @@ public class DoorsManager : MonoBehaviour
 
     void NextDoor()
     {
-        
-        for (int i = 1; i < doorsQueue.Count ; i++)
+        for (int i = 0; i < doorsQueue.Count; i++)
         {
-            doorsQueue[i].transform.DOLocalMoveX(doorsQueue[i - 1].transform.localPosition.x,0.25f) ;
+            if (i == 0)
+            {
+                doorsQueue[i].GetComponent<SpriteRenderer>().sprite =
+                    doorOpenPrefab.GetComponent<SpriteRenderer>().sprite;
+                doorsQueue[i].transform.DOLocalMoveX(doorsQueue[i].transform.localPosition.x - 5.0f, 0.25f)
+                    .OnComplete(() =>
+                    {
+                        Destroy(doorsQueue[0]);
+                        doorsQueue.RemoveAt(0);
+                    });
+            }
+            else
+            {
+                doorsQueue[i].transform.DOLocalMoveX(doorsQueue[i - 1].transform.localPosition.x, 0.25f);
+            }
         }
-        Destroy(doorsQueue[0]);
-        doorsQueue.RemoveAt(0);
-        
+        addDoorToList();
+    }
 
-      
+    void addDoorToList()
+    {
+        GameObject newDoor = Instantiate(doorPrefab,
+            new Vector3(doorsQueue[doorsQueue.Count - 1].transform.position.x + spaceBetweenDoors,
+                doorsQueue[doorsQueue.Count - 1].transform.position.y,
+                doorsQueue[doorsQueue.Count - 1].transform.position.z)
+            , Quaternion.identity, this.transform);
+        doorsQueue.Add(newDoor);
     }
 }
