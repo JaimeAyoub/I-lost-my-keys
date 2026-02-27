@@ -3,21 +3,23 @@ using UnityEngine;
 
 public class KeyManager : MonoBehaviour
 {
+    public static KeyManager instance;
     public List<KeyScriptableObject> keyList = new List<KeyScriptableObject>();
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    void Awake()
     {
-        
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+        DontDestroyOnLoad(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
-    void GiveKey()
+    public KeyScriptableObject GiveRandomKey()
     {
-        
+        int randomIndex = Random.Range(0, keyList.Count);
+        KeyScriptableObject key = keyList[randomIndex];
+        return key;
     }
 }

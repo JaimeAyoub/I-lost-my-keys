@@ -18,6 +18,8 @@ public class GridManager : MonoBehaviour
 
     public float sensitivityToSwipe = 50.0f;
 
+    public SpriteRenderer spriteKey;
+
     private void Awake()
     {
         if (instance == null)
@@ -49,28 +51,30 @@ public class GridManager : MonoBehaviour
     {
         Vector2 swipe = finger.SwipeScreenDelta;
         Debug.Log(swipe.y);
-        if (swipe.y < -sensitivityToSwipe && Mathf.Abs(swipe.y) > Mathf.Abs(swipe.x))
-        {
-            animationUI.ToptoDownAnimation();
-        }
-
+        // if (swipe.y < -sensitivityToSwipe && Mathf.Abs(swipe.y) > Mathf.Abs(swipe.x))
+        // {
+        //     animationUI.BajaGrid();
+        // }
+        //
         if (swipe.y > 0 && Mathf.Abs(swipe.y) > Mathf.Abs(swipe.x))
         {
             Compare();
-            animationUI.DownToTopAnimation();
+            // animationUI.SubeGrid();
         }
     }
 
     void Start()
     {
-        Application.targetFrameRate = 60;
-        QualitySettings.vSyncCount = 0;
     }
 
-    // Update is called once per frame
+    // Update is called once per framej
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            SetNewKey(KeyManager.instance.GiveRandomKey());
+            animationUI.BajaGrid();
+        }
     }
 
     void CheckCollision(LeanFinger finger)
@@ -125,18 +129,55 @@ public class GridManager : MonoBehaviour
             }
             else
             {
+                Debug.Log("INCORRECTOOOOO WEOOOOOOON AAAAAAAAAH");
                 break;
             }
         }
 
         if (correctBoxes == idToCompare.Count)
         {
-            Correcto();
+            ResetGrid();
         }
     }
 
-    void Correcto()
+    void ResetGrid()
     {
-        Debug.Log("Correcto");
+        animationUI.SubeGrid();
+        EmptySelectedIDs();
+        UnselectBoxes();
+    }
+
+    public void SetNewKey(KeyScriptableObject key)
+    {
+        key = KeyManager.instance.GiveRandomKey();
+        setIDs(key.IDs);
+        SetKeySprite(key.sprite);
+    }
+
+    private void setIDs(List<int> IDs)
+    {
+        idToCompare.Clear();
+        foreach (var key in IDs)
+        {
+            idToCompare.Add(key);
+        }
+    }
+
+    private void SetKeySprite(Sprite sprite)
+    {
+        spriteKey.sprite = sprite;
+    }
+
+    private void EmptySelectedIDs()
+    {
+        SelectedIDs.Clear();
+    }
+
+    private void UnselectBoxes()
+    {
+        foreach (var box in boxList)
+        {
+            box.GetComponent<BoxScript>().Deselected();
+        }
     }
 }

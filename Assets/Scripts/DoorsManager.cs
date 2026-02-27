@@ -42,10 +42,10 @@ public class DoorsManager : MonoBehaviour
             Debug.Log(doorsQueue.Count);
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            NextDoor();
-        }
+        // if (Input.GetKeyDown(KeyCode.R))
+        // {
+        //     NextDoor();
+        // }
     }
 
     void GenerateFirstDoors()

@@ -33,7 +33,7 @@ public class AnimationUI : MonoBehaviour
     {
     }
 
-    public void ToptoDownAnimation()
+    public void BajaGrid()
     {
         Vector2 startPosition = endPosition;
         float offSetY = 10;
@@ -47,10 +47,10 @@ public class AnimationUI : MonoBehaviour
         currentTween = objetctToAnimate.DOMoveY(endPosition.y, animationDuration).SetEase(animationCurve);
     }
 
-    public void DownToTopAnimation()
+    public void SubeGrid()
     {
         currentTween?.Kill();
-        currentTween = objetctToAnimate.DOMoveY(objetctToAnimate.transform.position.y + 10, animationDuration).SetEase(animationCurve);
+        currentTween = objetctToAnimate.DOMoveY(objetctToAnimate.transform.position.y + 10, animationDuration)
+            .SetEase(animationCurve);
     }
-
 }

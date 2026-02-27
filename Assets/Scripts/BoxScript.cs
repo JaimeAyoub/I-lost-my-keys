@@ -31,6 +31,9 @@ public class BoxScript : MonoBehaviour
     {
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         sr.color = Color.green;
+        Color newColor = sr.color;
+        newColor.a = 0.5f;
+        sr.color = newColor;
         isSelected = true;
         GridManager.instance.addSelected(this.gameObject);
     }
@@ -39,6 +42,9 @@ public class BoxScript : MonoBehaviour
     {
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         sr.color = Color.white;
+        Color newColor = sr.color;
+        newColor.a = 0.5f;
+        sr.color = newColor;
         isSelected = false;
         GridManager.instance.removeSelected(this.gameObject);
     }
