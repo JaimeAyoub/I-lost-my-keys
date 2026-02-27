@@ -625,7 +625,7 @@ MonoBehaviour:
   boxList: []
   SelectedIDs: 
   idToCompare: 020000000600000000000000
-  sensitivityToSwipe: 50
+  sensitivityToSwipe: 100
   spriteKey: {fileID: 1027923368}
 --- !u!4 &916452824
 Transform:

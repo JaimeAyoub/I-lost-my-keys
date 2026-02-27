@@ -1,7 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using Lean.Touch;
 using DG.Tweening;
+using System;
 
 public class DoorsManager : MonoBehaviour
 {
@@ -16,6 +18,8 @@ public class DoorsManager : MonoBehaviour
     public float spaceBetweenDoors;
     public List<GameObject> doorsQueue;
 
+    
+
     private void Awake()
     {
         if (instance == null)
@@ -26,6 +30,30 @@ public class DoorsManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+    }
+    protected virtual void OnEnable()
+    {
+        LeanTouch.OnFingerSwipe += HandleFingerSwipe;
+    }
+
+ 
+
+    private void HandleFingerSwipe(LeanFinger finger)
+    {
+        Vector2 swipe = finger.SwipeScreenDelta;
+        Debug.Log(swipe.y);
+        if (swipe.x < -GridManager.instance.sensitivityToSwipe && Mathf.Abs(swipe.x) > Mathf.Abs(swipe.y)) //Swipe Izquierda
+        {
+            Debug.Log("Swipe Derecha");
+            NextDoor();
+        }
+    }
+
+    protected virtual void OnDisable()
+    {
+        LeanTouch.OnFingerSwipe -= HandleFingerSwipe;
+
+
     }
 
 

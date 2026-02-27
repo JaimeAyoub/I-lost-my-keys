@@ -51,11 +51,12 @@ public class GridManager : MonoBehaviour
     {
         Vector2 swipe = finger.SwipeScreenDelta;
         Debug.Log(swipe.y);
-        // if (swipe.y < -sensitivityToSwipe && Mathf.Abs(swipe.y) > Mathf.Abs(swipe.x))
-        // {
-        //     animationUI.BajaGrid();
-        // }
-        //
+        if (swipe.x > sensitivityToSwipe && Mathf.Abs(swipe.x) > Mathf.Abs(swipe.y)) //Swipe Derecha
+        {
+            Debug.Log("Swipe Derecha");
+            StartNewDoor();
+        }
+
         if (swipe.y > 0 && Mathf.Abs(swipe.y) > Mathf.Abs(swipe.x))
         {
             Compare();
@@ -67,14 +68,10 @@ public class GridManager : MonoBehaviour
     {
     }
 
-    // Update is called once per framej
+    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            SetNewKey(KeyManager.instance.GiveRandomKey());
-            animationUI.BajaGrid();
-        }
+     
     }
 
     void CheckCollision(LeanFinger finger)
@@ -184,5 +181,11 @@ public class GridManager : MonoBehaviour
     private void Incorrect()
     {
         animationUI.IncorrectAnimation();
+    }
+
+    private void StartNewDoor()
+    {
+        SetNewKey(KeyManager.instance.GiveRandomKey());
+        animationUI.BajaGrid();
     }
 }
