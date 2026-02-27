@@ -129,7 +129,7 @@ public class GridManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("INCORRECTOOOOO WEOOOOOOON AAAAAAAAAH");
+                Incorrect();
                 break;
             }
         }
@@ -179,5 +179,10 @@ public class GridManager : MonoBehaviour
         {
             box.GetComponent<BoxScript>().Deselected();
         }
+    }
+
+    private void Incorrect()
+    {
+        animationUI.IncorrectAnimation();
     }
 }
