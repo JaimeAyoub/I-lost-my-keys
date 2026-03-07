@@ -1759,16 +1759,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7088633623903631922, guid: 2f579d9fa2e2eb6469b2f02f3d9bd5a4, type: 3}
       propertyPath: poolSize
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7088633623903631922, guid: 2f579d9fa2e2eb6469b2f02f3d9bd5a4, type: 3}
       propertyPath: soundList.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7088633623903631922, guid: 2f579d9fa2e2eb6469b2f02f3d9bd5a4, type: 3}
       propertyPath: 'soundList.Array.data[0]'
       value: 
       objectReference: {fileID: 8300000, guid: 133bc764fec463345bc11d89b25fe683, type: 3}
+    - target: {fileID: 7088633623903631922, guid: 2f579d9fa2e2eb6469b2f02f3d9bd5a4, type: 3}
+      propertyPath: 'soundList.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 22bda720296fc4140b212e845d1b5d73, type: 3}
+    - target: {fileID: 7088633623903631922, guid: 2f579d9fa2e2eb6469b2f02f3d9bd5a4, type: 3}
+      propertyPath: 'soundList.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: aa038d182bbd73140a4a60d57806e709, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -133,10 +133,12 @@ public class GridManager : MonoBehaviour
         if (correctBoxes == idToCompare.Count && incorrectBoxes == 0)
         {
             GameManager.instance.CorrectKey();
+            AudioManager.instance.PlaySFX(SoundType.Correct);
         }
         else
         {
             Incorrect(incorrectBoxList);
+            AudioManager.instance.PlaySFX(SoundType.Wrong);
         }
     }
 

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public enum SoundType
 {
-    Select
+    Select,
+    Wrong,
+    Correct
 }
 
 [RequireComponent(typeof(AudioSource))]
@@ -18,6 +20,8 @@ public class AudioManager : MonoBehaviour
     public AudioSource audioSource;
     public AudioSource BGMSource;
     public AudioSource soundSourcePoint;
+    
+    public SoundType  soundType;
 
     [Header("Configuraci�n de SFX")]
     [SerializeField] private int poolSize = 10; 

@@ -129,7 +129,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: PuertaAbierta
     originalName: 
-    pivot: {x: 0.44444445, y: 0}
+    pivot: {x: 0.45454547, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -137,7 +137,7 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 9
+      width: 11
       height: 16
     spriteID: 6de475e1cca652942a60c3466490cfd1
     spriteBone: []
@@ -167,9 +167,9 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 4
+        x: 3
         y: 0
-        width: 9
+        width: 11
         height: 16
       spriteId: 6de475e1cca652942a60c3466490cfd1
     linkedCells: []
