@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Lean.Touch;
+using UnityEditor;
 
 
 public class GridManager : MonoBehaviour
@@ -51,16 +52,14 @@ public class GridManager : MonoBehaviour
     {
         Vector2 swipe = finger.SwipeScreenDelta;
         Debug.Log(swipe.y);
-        if (swipe.x > sensitivityToSwipe && Mathf.Abs(swipe.x) > Mathf.Abs(swipe.y)) //Swipe Derecha
+        if (swipe.x > sensitivityToSwipe && Mathf.Abs(swipe.x) > Mathf.Abs(swipe.y)) //Swipe dercha
         {
-            Debug.Log("Swipe Derecha");
-            StartNewDoor();
         }
 
-        if (swipe.y > 0 && Mathf.Abs(swipe.y) > Mathf.Abs(swipe.x))
+        if (swipe.y > 0 && Mathf.Abs(swipe.y) > Mathf.Abs(swipe.x) &&
+            GameManager.instance.isKeying) //Swipe hacia arriba.
         {
             Compare();
-            // animationUI.SubeGrid();
         }
     }
 
@@ -71,7 +70,6 @@ public class GridManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     
     }
 
     void CheckCollision(LeanFinger finger)
@@ -98,20 +96,6 @@ public class GridManager : MonoBehaviour
             SelectedIDs.Remove(box.GetComponent<BoxScript>().ID);
     }
 
-    public void returnSelected()
-    {
-        if (SelectedIDs.Count > 0)
-        {
-            foreach (var box in SelectedIDs)
-            {
-                Debug.Log("Los cuadros elegidos son: " + box);
-            }
-        }
-        else
-        {
-            Debug.Log("Lista vacia");
-        }
-    }
 
     void Compare()
     {
@@ -133,11 +117,11 @@ public class GridManager : MonoBehaviour
 
         if (correctBoxes == idToCompare.Count)
         {
-            ResetGrid();
+            GameManager.instance.CorrectKey();
         }
     }
 
-    void ResetGrid()
+    public void ResetGrid()
     {
         animationUI.SubeGrid();
         EmptySelectedIDs();
@@ -183,7 +167,7 @@ public class GridManager : MonoBehaviour
         animationUI.IncorrectAnimation();
     }
 
-    private void StartNewDoor()
+    public void StartNewDoor()
     {
         SetNewKey(KeyManager.instance.GiveRandomKey());
         animationUI.BajaGrid();
