@@ -18,7 +18,6 @@ public class DoorsManager : MonoBehaviour
     public float spaceBetweenDoors;
     public List<GameObject> doorsQueue;
 
-    
 
     private void Awake()
     {
@@ -31,7 +30,7 @@ public class DoorsManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
-   
+
 
     void Start()
     {
@@ -64,6 +63,9 @@ public class DoorsManager : MonoBehaviour
 
             separation += spaceBetweenDoors;
         }
+        doorsQueue[0].GetComponent<SpriteRenderer>().sprite =
+            doorOpenPrefab.GetComponent<SpriteRenderer>().sprite;
+        
     }
 
     public void NextDoor()
@@ -86,6 +88,7 @@ public class DoorsManager : MonoBehaviour
                 doorsQueue[i].transform.DOLocalMoveX(doorsQueue[i - 1].transform.localPosition.x, 0.25f);
             }
         }
+
         addDoorToList();
     }
 
@@ -97,5 +100,11 @@ public class DoorsManager : MonoBehaviour
                 doorsQueue[doorsQueue.Count - 1].transform.position.z)
             , Quaternion.identity, this.transform);
         doorsQueue.Add(newDoor);
+    }
+
+    public void OpenDoor()
+    {
+        doorsQueue[0].GetComponent<SpriteRenderer>().sprite =
+            doorOpenPrefab.GetComponent<SpriteRenderer>().sprite;
     }
 }

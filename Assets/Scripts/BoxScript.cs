@@ -1,9 +1,11 @@
 using UnityEngine;
+using DG.Tweening;
 
 public class BoxScript : MonoBehaviour
 {
     public bool isSelected = false;
     public int ID;
+    Tween tween;
 
     void Start()
     {
@@ -32,7 +34,7 @@ public class BoxScript : MonoBehaviour
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         sr.color = Color.green;
         Color newColor = sr.color;
-        newColor.a = 0.5f;
+        newColor.a = 0.25f;
         sr.color = newColor;
         isSelected = true;
         GridManager.instance.addSelected(this.gameObject);
@@ -43,9 +45,27 @@ public class BoxScript : MonoBehaviour
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         sr.color = Color.white;
         Color newColor = sr.color;
-        newColor.a = 0.5f;
+        newColor.a = 0.0f;
         sr.color = newColor;
         isSelected = false;
         GridManager.instance.removeSelected(this.gameObject);
+    }
+
+    public void AnimateWrongAnimation()
+    {
+        tween.Kill();
+        Color actualColor;
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        actualColor = sr.color;
+       tween =  sr.DOColor(Color.red, 0.3f).SetLoops(2, LoopType.Yoyo);
+    }
+
+    public void NeedsToSelectAnimation()
+    {
+        DOTween.KillAll();
+        Color actualColor;
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        actualColor = sr.color;
+        sr.DOColor(Color.blue, 0.3f).SetLoops(2, LoopType.Yoyo);
     }
 }

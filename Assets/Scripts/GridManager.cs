@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using Lean.Touch;
 using UnityEditor;
@@ -88,36 +89,54 @@ public class GridManager : MonoBehaviour
     {
         if (!SelectedIDs.Contains(box.GetComponent<BoxScript>().ID))
             SelectedIDs.Add(box.GetComponent<BoxScript>().ID);
+
+
+        int maxCombo = 15;
+
+
+        float progress = (float)SelectedIDs.Count / maxCombo;
+
+        float targetPitch = Mathf.Lerp(1.5f, 2.5f, progress);
+
+        GameManager.instance.CameraShake(0.25f, 0.25f, 0.03f);
+        AudioManager.instance.PlaySFXWithPitch(0, targetPitch);
     }
 
     public void removeSelected(GameObject box)
     {
         if (SelectedIDs.Contains(box.GetComponent<BoxScript>().ID))
             SelectedIDs.Remove(box.GetComponent<BoxScript>().ID);
+        GameManager.instance.CameraShake(0.25f, 0.25f, 0.03f);
     }
 
 
     void Compare()
     {
         int correctBoxes = 0;
+        int incorrectBoxes = 0;
+        List<BoxScript> incorrectBoxList = new List<BoxScript>();
 
-
-        foreach (var t in idToCompare)
+        foreach (var t in SelectedIDs)
         {
-            if (SelectedIDs.Contains(t))
+            if (idToCompare.Contains(t))
             {
                 correctBoxes++;
             }
             else
             {
-                Incorrect();
-                break;
+                incorrectBoxes++;
+                incorrectBoxList.Add(returnBoxByID(t));
             }
         }
 
-        if (correctBoxes == idToCompare.Count)
+        Debug.Log(incorrectBoxes);
+        if (correctBoxes == idToCompare.Count && incorrectBoxes == 0)
         {
             GameManager.instance.CorrectKey();
+        }
+        else
+        {
+            Incorrect(incorrectBoxList);
         }
     }
 
@@ -162,14 +181,32 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    private void Incorrect()
+    private void Incorrect(List<BoxScript> incorrectBoxList)
     {
         animationUI.IncorrectAnimation();
+        if (incorrectBoxList.Count > 0)
+        {
+            foreach (BoxScript box in incorrectBoxList)
+                box.AnimateWrongAnimation();
+        }
     }
 
     public void StartNewDoor()
     {
         SetNewKey(KeyManager.instance.GiveRandomKey());
         animationUI.BajaGrid();
+    }
+
+    public BoxScript returnBoxByID(int id)
+    {
+        foreach (var t in boxList)
+        {
+            if (t.GetComponent<BoxScript>().ID == id)
+            {
+                return t.GetComponent<BoxScript>();
+            }
+        }
+
+        return null;
     }
 }
