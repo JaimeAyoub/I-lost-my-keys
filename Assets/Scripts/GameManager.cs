@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
         {
             AudioManager.instance.ResetPitch();
             StartKeying();
-            AudioManager.instance.PlaySFX(SoundType.NextDoor,0.7f);
+            AudioManager.instance.PlaySFX(SoundType.NextDoor, 0.7f);
         }
     }
 
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
     {
         Application.targetFrameRate = 60;
         QualitySettings.vSyncCount = 0;
-        
+
         if (cinemachine != null)
         {
             noise = cinemachine.GetComponent<CinemachineBasicMultiChannelPerlin>();
@@ -129,6 +129,20 @@ public class GameManager : MonoBehaviour
         {
             remainingTime += (1 * Time.deltaTime);
             sliderTimeValiue.value = remainingTime;
+        }
+        else
+        {
+            
+        }
+    }
+
+    public void SetHighScore(int score)
+    {
+        int highScore = PlayerPrefs.GetInt("HighScore", 0);
+        if (score > highScore)
+        {
+            PlayerPrefs.SetInt("HighScore", score);
+            PlayerPrefs.Save();
         }
     }
 }
