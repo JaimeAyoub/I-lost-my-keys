@@ -17,8 +17,6 @@ public class AnimationUI : MonoBehaviour
     public CinemachineVirtualCameraBase cinemachine;
     private CinemachineBasicMultiChannelPerlin noise;
 
-    
-
 
     public Vector2 endPosition;
 
@@ -34,7 +32,6 @@ public class AnimationUI : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-      
     }
 
     // Update is called once per frame
@@ -69,10 +66,18 @@ public class AnimationUI : MonoBehaviour
         currentTween = objetctToAnimate.DOMoveY(objetctToAnimate.transform.position.y + 5, animationDuration)
             .SetEase(animationCurve).OnComplete(() =>
             {
-                GameManager.instance.CameraShake(1.0f,1.0f,0.25f);
+                GameManager.instance.CameraShake(1.0f, 1.0f, 0.25f);
                 objetctToAnimate.DOMoveY(0, animationDuration).SetEase(animationCurve);
             });
     }
 
+    public void EndCanvas(GameObject cosa)
+    {
+        cosa.GetComponentInChildren<RectTransform>().DOLocalMoveY(0, animationDuration).SetEase(animationCurve);
+    }
 
+    public void SubeEndCanvas(GameObject cosa)
+    {
+        cosa.GetComponentInChildren<RectTransform>().DOLocalMoveY(1000, animationDuration).SetEase(animationCurve);
+    }
 }

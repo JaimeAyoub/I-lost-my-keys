@@ -4,6 +4,7 @@ using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
 using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Task = System.Threading.Tasks.Task;
 
@@ -22,6 +23,8 @@ public class GameManager : MonoBehaviour
 
 
     public TextMeshProUGUI correctKeysTextValue;
+    public TextMeshProUGUI endScoreText;
+    public TextMeshProUGUI HighScoreText;
 
 
     public float remainingTime;
@@ -29,6 +32,12 @@ public class GameManager : MonoBehaviour
     public float maxTime;
 
     public Slider sliderTimeValiue;
+
+    public GameObject EndCanvas;
+
+    public bool isTimeRunOut = false;
+    
+    public AnimationUI animationUI;
 
     private void Awake()
     {
@@ -53,7 +62,7 @@ public class GameManager : MonoBehaviour
         Vector2 swipe = finger.SwipeScreenDelta;
         Debug.Log(swipe.y);
         if (swipe.x < -GridManager.instance.sensitivityToSwipe &&
-            Mathf.Abs(swipe.x) > Mathf.Abs(swipe.y) && !isKeying) //Swipe Izquierda 
+            Mathf.Abs(swipe.x) > Mathf.Abs(swipe.y) && !isKeying && !isTimeRunOut) //Swipe Izquierda 
         {
             AudioManager.instance.ResetPitch();
             StartKeying();
@@ -86,11 +95,14 @@ public class GameManager : MonoBehaviour
             sliderTimeValiue.maxValue = maxTime;
             sliderTimeValiue.value = 0;
         }
+        
+        ResetGame();
     }
 
     void Update()
     {
-        addTimer();
+        if (!isTimeRunOut)
+            addTimer();
     }
 
     public void StartKeying()
@@ -132,7 +144,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            
+            EndGame();
         }
     }
 
@@ -143,6 +155,40 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("HighScore", score);
             PlayerPrefs.Save();
+            HighScoreText.text = score.ToString();
         }
+    }
+
+    public void EndGame()
+    {
+       
+        if (animationUI != null)
+        {
+            if (EndCanvas)
+                animationUI.EndCanvas(EndCanvas);
+        }
+
+        endScoreText.text = correctKeys.ToString();
+        SetHighScore(correctKeys);
+        isTimeRunOut = true;
+        animationUI.SubeGrid();
+    }
+
+    public void ResetGame()
+    {
+        remainingTime = 0;
+        isTimeRunOut = false;
+        correctKeys = 0;
+        isKeying = false;
+        correctKeysTextValue.text = correctKeys.ToString();
+        GridManager.instance.ResetGrid();
+        DoorsManager.instance.OpenDoor();
+        animationUI.SubeEndCanvas(EndCanvas);
+
+    }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadSceneAsync(0);
     }
 }

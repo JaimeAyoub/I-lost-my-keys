@@ -58,7 +58,7 @@ public class GridManager : MonoBehaviour
         }
 
         if (swipe.y > 0 && Mathf.Abs(swipe.y) > Mathf.Abs(swipe.x) &&
-            GameManager.instance.isKeying) //Swipe hacia arriba.
+            GameManager.instance.isKeying && !GameManager.instance.isTimeRunOut ) //Swipe hacia arriba.
         {
             Compare();
         }
