@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     public GameObject EndCanvas;
 
     public bool isTimeRunOut = false;
-    
+
     public AnimationUI animationUI;
 
     private void Awake()
@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
             sliderTimeValiue.maxValue = maxTime;
             sliderTimeValiue.value = 0;
         }
-        
+
         ResetGame();
     }
 
@@ -161,7 +161,6 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
-       
         if (animationUI != null)
         {
             if (EndCanvas)
@@ -184,7 +183,6 @@ public class GameManager : MonoBehaviour
         GridManager.instance.ResetGrid();
         DoorsManager.instance.OpenDoor();
         animationUI.SubeEndCanvas(EndCanvas);
-
     }
 
     public void GoToMainMenu()
