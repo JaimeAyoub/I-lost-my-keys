@@ -1075,6 +1075,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 603133522}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: TouchButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &577615285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2172,6 +2184,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 603133522}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: TouchButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &988853652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2898,6 +2922,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 603133522}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: TouchButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1191556243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3419,6 +3455,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1624156528}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: SwitchToTutorial
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 603133522}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: TouchButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4917,6 +4965,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 603133522}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: TouchButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2050485325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5009,11 +5069,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7088633623903631922, guid: 2f579d9fa2e2eb6469b2f02f3d9bd5a4, type: 3}
       propertyPath: poolSize
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7088633623903631922, guid: 2f579d9fa2e2eb6469b2f02f3d9bd5a4, type: 3}
       propertyPath: soundList.Array.size
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7088633623903631922, guid: 2f579d9fa2e2eb6469b2f02f3d9bd5a4, type: 3}
       propertyPath: 'soundList.Array.data[0]'
@@ -5031,6 +5091,14 @@ PrefabInstance:
       propertyPath: 'soundList.Array.data[3]'
       value: 
       objectReference: {fileID: 8300000, guid: 1015617164a66e440baeb07e7f9dceb6, type: 3}
+    - target: {fileID: 7088633623903631922, guid: 2f579d9fa2e2eb6469b2f02f3d9bd5a4, type: 3}
+      propertyPath: 'soundList.Array.data[4]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 4f51882331b0941458fb08246d577490, type: 3}
+    - target: {fileID: 7088633623903631922, guid: 2f579d9fa2e2eb6469b2f02f3d9bd5a4, type: 3}
+      propertyPath: 'soundList.Array.data[5]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 9a757750f1834f340a167280cd2f678d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

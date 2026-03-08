@@ -7,7 +7,9 @@ public enum SoundType
     Select,
     Wrong,
     Correct,
-    NextDoor
+    NextDoor,
+    BGM,
+    TouchButton
 }
 
 [RequireComponent(typeof(AudioSource))]

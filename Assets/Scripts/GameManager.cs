@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
             sliderTimeValiue.maxValue = maxTime;
             sliderTimeValiue.value = 0;
         }
-
+        AudioManager.instance.PlayBGM(SoundType.BGM,0.15f);
         //ResetGame();
     }
 
@@ -203,5 +203,10 @@ public class GameManager : MonoBehaviour
         hasStarted = false;
         animationUI.BajaCanvas(bienvenidoCanvas);
         animationUI.SubeCanvas(EndCanvas);
+    }
+
+    public void TouchButton()
+    {
+        AudioManager.instance.PlaySFX(SoundType.TouchButton);
     }
 }
