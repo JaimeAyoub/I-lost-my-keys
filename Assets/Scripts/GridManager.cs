@@ -107,11 +107,19 @@ public class GridManager : MonoBehaviour
         if (SelectedIDs.Contains(box.GetComponent<BoxScript>().ID))
             SelectedIDs.Remove(box.GetComponent<BoxScript>().ID);
         GameManager.instance.CameraShake(0.25f, 0.25f, 0.03f);
+        int maxCombo = 15;
+
+
+        float progress = (float)SelectedIDs.Count / maxCombo;
+
+        float targetPitch = Mathf.Lerp(1.5f, 2.5f, progress);
+        AudioManager.instance.PlaySFXWithPitch(0, targetPitch);
     }
 
 
     void Compare()
     {
+        AudioManager.instance.ResetPitch();
         int correctBoxes = 0;
         int incorrectBoxes = 0;
         List<BoxScript> incorrectBoxList = new List<BoxScript>();

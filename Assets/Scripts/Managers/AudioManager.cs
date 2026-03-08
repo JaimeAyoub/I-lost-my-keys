@@ -6,7 +6,8 @@ public enum SoundType
 {
     Select,
     Wrong,
-    Correct
+    Correct,
+    NextDoor
 }
 
 [RequireComponent(typeof(AudioSource))]
@@ -117,5 +118,11 @@ public class AudioManager : MonoBehaviour
         {
             source.Stop();
         }
+    }
+
+    public void ResetPitch()
+    {
+        AudioSource source = GetAvailableSFXSource();
+        source.pitch = 1f;
     }
 }

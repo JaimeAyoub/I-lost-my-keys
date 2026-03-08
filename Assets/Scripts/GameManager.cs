@@ -4,6 +4,7 @@ using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
 using System.Threading.Tasks;
+using UnityEngine.UI;
 using Task = System.Threading.Tasks.Task;
 
 public class GameManager : MonoBehaviour
@@ -21,6 +22,13 @@ public class GameManager : MonoBehaviour
 
 
     public TextMeshProUGUI correctKeysTextValue;
+
+
+    public float remainingTime;
+
+    public float maxTime;
+
+    public Slider sliderTimeValiue;
 
     private void Awake()
     {
@@ -47,7 +55,9 @@ public class GameManager : MonoBehaviour
         if (swipe.x < -GridManager.instance.sensitivityToSwipe &&
             Mathf.Abs(swipe.x) > Mathf.Abs(swipe.y) && !isKeying) //Swipe Izquierda 
         {
+            AudioManager.instance.ResetPitch();
             StartKeying();
+            AudioManager.instance.PlaySFX(SoundType.NextDoor,0.7f);
         }
     }
 
@@ -70,10 +80,17 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogWarning("No se asigno Cinemachine tonto");
         }
+
+        if (sliderTimeValiue != null)
+        {
+            sliderTimeValiue.maxValue = maxTime;
+            sliderTimeValiue.value = 0;
+        }
     }
 
     void Update()
     {
+        addTimer();
     }
 
     public void StartKeying()
@@ -104,5 +121,14 @@ public class GameManager : MonoBehaviour
         await Task.Delay((int)(duration * 1000));
         noise.AmplitudeGain = 0;
         noise.FrequencyGain = 0;
+    }
+
+    public void addTimer()
+    {
+        if (remainingTime < maxTime)
+        {
+            remainingTime += (1 * Time.deltaTime);
+            sliderTimeValiue.value = remainingTime;
+        }
     }
 }
