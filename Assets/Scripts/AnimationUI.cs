@@ -71,12 +71,12 @@ public class AnimationUI : MonoBehaviour
             });
     }
 
-    public void EndCanvas(GameObject cosa)
+    public void BajaCanvas(GameObject cosa)
     {
         cosa.GetComponentInChildren<RectTransform>().DOLocalMoveY(0, animationDuration).SetEase(animationCurve);
     }
 
-    public void SubeEndCanvas(GameObject cosa)
+    public void SubeCanvas(GameObject cosa)
     {
         cosa.GetComponentInChildren<RectTransform>().DOLocalMoveY(1000, animationDuration).SetEase(animationCurve);
     }

@@ -34,10 +34,14 @@ public class GameManager : MonoBehaviour
     public Slider sliderTimeValiue;
 
     public GameObject EndCanvas;
+    public GameObject bienvenidoCanvas;
 
     public bool isTimeRunOut = false;
 
+    public bool hasStarted = false;
+
     public AnimationUI animationUI;
+
 
     private void Awake()
     {
@@ -62,7 +66,7 @@ public class GameManager : MonoBehaviour
         Vector2 swipe = finger.SwipeScreenDelta;
         Debug.Log(swipe.y);
         if (swipe.x < -GridManager.instance.sensitivityToSwipe &&
-            Mathf.Abs(swipe.x) > Mathf.Abs(swipe.y) && !isKeying && !isTimeRunOut) //Swipe Izquierda 
+            Mathf.Abs(swipe.x) > Mathf.Abs(swipe.y) && !isKeying && !isTimeRunOut && hasStarted) //Swipe Izquierda 
         {
             AudioManager.instance.ResetPitch();
             StartKeying();
@@ -96,12 +100,12 @@ public class GameManager : MonoBehaviour
             sliderTimeValiue.value = 0;
         }
 
-        ResetGame();
+        //ResetGame();
     }
 
     void Update()
     {
-        if (!isTimeRunOut)
+        if (!isTimeRunOut && hasStarted)
             addTimer();
     }
 
@@ -164,13 +168,14 @@ public class GameManager : MonoBehaviour
         if (animationUI != null)
         {
             if (EndCanvas)
-                animationUI.EndCanvas(EndCanvas);
+                animationUI.BajaCanvas(EndCanvas);
         }
 
         endScoreText.text = correctKeys.ToString();
         SetHighScore(correctKeys);
         isTimeRunOut = true;
         animationUI.SubeGrid();
+        hasStarted = false;
     }
 
     public void ResetGame()
@@ -182,11 +187,21 @@ public class GameManager : MonoBehaviour
         correctKeysTextValue.text = correctKeys.ToString();
         GridManager.instance.ResetGrid();
         DoorsManager.instance.OpenDoor();
-        animationUI.SubeEndCanvas(EndCanvas);
+        animationUI.SubeCanvas(EndCanvas);
+        hasStarted = true;
     }
 
-    public void GoToMainMenu()
+
+    public void StartGame()
     {
-        SceneManager.LoadSceneAsync(0);
+        hasStarted = true;
+        animationUI.SubeCanvas(bienvenidoCanvas);
+    }
+
+    public void BajarMainMenu()
+    {
+        hasStarted = false;
+        animationUI.BajaCanvas(bienvenidoCanvas);
+        animationUI.SubeCanvas(EndCanvas);
     }
 }

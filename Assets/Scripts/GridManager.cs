@@ -53,12 +53,10 @@ public class GridManager : MonoBehaviour
     {
         Vector2 swipe = finger.SwipeScreenDelta;
         Debug.Log(swipe.y);
-        if (swipe.x > sensitivityToSwipe && Mathf.Abs(swipe.x) > Mathf.Abs(swipe.y)) //Swipe dercha
-        {
-        }
 
         if (swipe.y > 0 && Mathf.Abs(swipe.y) > Mathf.Abs(swipe.x) &&
-            GameManager.instance.isKeying && !GameManager.instance.isTimeRunOut ) //Swipe hacia arriba.
+            GameManager.instance.isKeying && !GameManager.instance.isTimeRunOut
+            && GameManager.instance.hasStarted) //Swipe hacia arriba.
         {
             Compare();
         }
